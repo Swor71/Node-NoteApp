@@ -1,28 +1,25 @@
-console.log('Starting app \n');
-
-const fs = require('fs');
-const _ = require('lodash');
 const yargs = require('yargs');
 
 const notes = require('./notes');
 
 const argv = yargs.argv;
-
 const command = argv._[0];
-
 
 if (command === 'add') {
   const note = notes.addNote(argv.title, argv.body);
   if (note) {
     console.log('New note added:');
     notes.logNote(note);
-    
+
   } else {
     console.log('A note with this title already exists.');
   }
 
 } else if (command === 'list') {
-  notes.getAllNotes();
+  const allNotes = notes.getAllNotes();
+
+  console.log(`Printing ${allNotes.length} note(s).`);
+  allNotes.forEach(note => notes.logNote(note));
 
 } else if (command === 'read') {
   const note = notes.getNote(argv.title);
