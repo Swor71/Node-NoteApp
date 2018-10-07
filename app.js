@@ -18,7 +18,9 @@ if (command === 'add') {
 } else if (command === 'read') {
   notes.getNote(argv.title);
 } else if (command === 'remove') {
-  notes.removeNote(argv.title);
+  const noteRemoved = notes.removeNote(argv.title);
+
+  noteRemoved ? console.log('Removed note') : console.log('Note was not removed');
 } else {
   console.log('Command not recognized');
 }
