@@ -35,7 +35,9 @@ const getAllNotes = () => {
 };
 
 const getNote = (title) => {
-  console.log(`One note here: ${title}`);
+  let notes = fetchNotes();
+  let filteredNote = notes.filter(note => note.title === title);
+  return filteredNote[0];
 }
 
 const removeNote = (title) => {
@@ -46,9 +48,16 @@ const removeNote = (title) => {
   return notes.length !== filteredNotes.length;
 }
 
+const logNote = note => {
+  console.log('--');
+  console.log(`Title: ${note.title}`);
+  console.log(`Body: ${note.body}`);
+}
+
 module.exports = {
   addNote,
   getAllNotes,
   getNote,
   removeNote,
+  logNote,
 }
